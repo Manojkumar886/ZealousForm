@@ -1,15 +1,45 @@
-import React from "react";
+import React, {  useEffect, useState } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import { list } from "./ArrayValues";
+import { Zform } from "./ZealousForm";
 
 export const Display=()=>{
+    const[tmparray,setTmparray]=useState([])
+    const[createview,setCreateview]=useState(false)
+    const add=()=>
+    {
+        setTmparray(list())
+    }    
+    useEffect(()=>
+    {
+        add()
+    })
     return(
         <>
         <div className="container mt-3">
-            <div className="row justify-content-center">
-                <div className="mt-2 text-center">
-                    <button className="btn btn-outline-success col-5 me-5">New Registration</button>
-                    <button className="btn btn-outline-danger col-5">Login</button>
-                </div>
+            {(createview)?
+            <>
+                <Zform/>
+                <button className="btn btn-outline-danger"
+                onClick={()=>
+                    {
+                        setCreateview(false)
+                    }
+                }>
+                    back
+                </button>
+            </>
+            :
+            <>
+            <button className="btn btn-outline-success" 
+            onClick={()=>
+                {
+                    setCreateview(true)
+                }}>
+                New Registration 
+            </button>
+            </>
+            }
             </div>
             <h1 className="text-center text-black bg-info mt-5 ">Zealous Student Details</h1>
             <div className="row justify-content-center">
@@ -26,11 +56,23 @@ export const Display=()=>{
                                 <th>PaymentDetails</th>
                                 <th>LanguagesKnown</th>
                             </tr>
+                                {tmparray.map((obj1)=>
+                                (
+                                    <tr>
+                                    <td>{obj1.zeaName}</td>
+                                    <td>{obj1.zeaDob}</td>
+                                    <td>{obj1.zeaAdd}</td>
+                                    <td>{obj1.zeaMail}</td>
+                                    <td>{obj1.zeaNum}</td>
+                                    <td>{obj1.zeaCourse}</td>
+                                    <td>{obj1.zeaPayment}</td>
+                                    <td>{obj1.zeaSkills}</td>
+                                    </tr>
+                                ))}
                         </thead>
                     </table>
                 </div>
             </div>
-        </div>
         </>
     )
 }
