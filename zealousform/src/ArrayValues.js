@@ -39,3 +39,21 @@ export const create=(obj)=>
 {
     mystudents.push(obj)
 }
+
+export const alter=(place,data)=>
+{
+    mystudents[place]=data
+}
+
+export const wash=(index)=>
+{
+mystudents=mystudents.filter((v,p)=>{
+    return p!==index
+})
+return mystudents
+}
+
+
+export const fetchexact=(pos)=>{
+    return mystudents[pos]
+}

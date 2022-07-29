@@ -1,23 +1,20 @@
-import React from "react";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
-import { useState } from "react";
-import { create } from "./ArrayValues";
+import React, { useState } from "react";
+import { alter } from "./ArrayValues";
 
-export const Zform=()=>
+
+export const Update=(connect)=>
 {
+    const[pos,setPos]=useState(connect.who)
 
-    //const[value,setValue]=useState()
-    //{
-    //}
     const[person,setPerson]=useState({
-        "zeaName":"",
-        "zeaDob":"",
-        "zeaAdd":"",
-        "zeaMail":"",
-        "zeaNum":0,
-        "zeaCourse":"",
-        "zeaPayment":"",
-        "zeaSkills":new Array()
+        "zeaName":connect.mention.zeaName,
+        "zeaDob":connect.mention.zeaDob,
+        "zeaAdd":connect.mention.zeaAdd,
+        "zeaMail":connect.mention.zeaMail,
+        "zeaNum":connect.mention.zeaNum,
+        "zeaCourse":connect.mention.zeaCourse,
+        "zeaPayment":connect.mention.zeaPayment,
+        "zeaSkills":connect.mention.zeaSkills
     }) 
 
     const tracky=(obj)=> //store a array values
@@ -39,10 +36,12 @@ export const Zform=()=>
         )
     }
 
-    const reg=()=>{
+    const reg1=()=>{
         // alert('new life start-welcome to zealous tech park')
         // alert("Successfully Registered"+JSON.stringify(person))
-        create(person)
+        // create(person)
+        alter(pos,person)
+        alert('Updated Successfully.View the your details please click the back button')
     }
     const remove=()=>{
         alert('Rejected')
@@ -54,13 +53,17 @@ export const Zform=()=>
     const change={
         fontFamily:'Orbitron'
     }
-    return(
+
+
+
+
+    return (
         <>
-        <div className="container mt-5">
+            <div className="container mt-5">
             <div className="row justify-content-center">
                 <div className="col-lg-8 col-md-10 col-sm-12 card bg-dark">
                     <div className="card-body text-secondary text-center">
-                        <img src="../Images/ZealousLogo.jpg" alt="" className="card-img" style={imgsrc} ></img>
+                        <img src="../Images/ZealousLogo.jpg" alt="Something Something" className="card-img" style={imgsrc} ></img>
                         <h1 style={change} className="text-primary text-center">Zealous System Corp</h1>
                     </div>
                 </div>
@@ -139,7 +142,6 @@ export const Zform=()=>
                         placeholder="cash or cheque or card"
                         className="form-control"
                         />
-                        
                     </div>
                     <div className="form-group mt-1">
                         <label>LanguagesKnown</label>
@@ -148,7 +150,7 @@ export const Zform=()=>
                         <input type="checkbox" onChange={tracky} name="zeaSkills" value="Malayalam" className="ms-5" />Malayalam
                     </div>
                     <div className="text-center mt-2 ">
-                        <button onClick={reg} className="btn btn-outline-success col-5 ms-4">Register</button>
+                        <button onClick={reg1} className="btn btn-outline-success col-5 ms-4">Update</button>
                         <button onClick={remove} className="btn btn-outline-warning col-5 me-4">cancel</button>
 
                     </div>

@@ -1,11 +1,15 @@
 import React, {  useEffect, useState } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
-import { list } from "./ArrayValues";
+import { fetchexact, list, wash } from "./ArrayValues";
+import { Update } from "./Update";
 import { Zform } from "./ZealousForm";
 
 export const Display=()=>{
     const[tmparray,setTmparray]=useState([])
     const[createview,setCreateview]=useState(false)
+    const[updateview,setUpdateview]=useState(false)
+    const[pos,setPos]=useState(0)
+    const[obj,setObj]=useState({})
     const add=()=>
     {
         setTmparray(list())
@@ -27,6 +31,19 @@ export const Display=()=>{
                     }
                 }>
                     back
+                </button>
+            </>
+            :
+            (updateview)?
+            <>
+                <Update who={pos} mention={obj}/>
+                <button className="btn btn-outline-dark text-light"
+                    onClick={()=>
+                    {
+                        setUpdateview(false)
+                    }}
+                >
+                    Back
                 </button>
             </>
             :
@@ -55,8 +72,9 @@ export const Display=()=>{
                                 <th>CourseDetails</th>
                                 <th>PaymentDetails</th>
                                 <th>LanguagesKnown</th>
+                                <th className="text-light bg-dark">ACTIONS</th>
                             </tr>
-                                {tmparray.map((obj1)=>
+                                {tmparray.map((obj1,ind)=>
                                 (
                                     <tr>
                                     <td>{obj1.zeaName}</td>
@@ -67,6 +85,26 @@ export const Display=()=>{
                                     <td>{obj1.zeaCourse}</td>
                                     <td>{obj1.zeaPayment}</td>
                                     <td>{obj1.zeaSkills}</td>
+                                    <td>
+                                        <button className="btn btn-outline-warning rounded-circle"
+                                            onClick={()=>
+                                            {
+                                                setUpdateview(true)
+                                                setPos(ind)
+                                                const yer=fetchexact(ind)
+                                                setObj(yer)
+                                            }}    
+                                        >Edit
+                                    </button>
+                                        <button className="btn btn-outline-danger"
+                                        onClick={()=>
+                                        {
+                                            setTmparray(wash(ind))
+                                        }}
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
                                     </tr>
                                 ))}
                         </thead>
