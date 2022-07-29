@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/ZealousForm/static/css/main.84487ea8.css",
+    "main.js": "/ZealousForm/static/js/main.7be4f905.js",
+    "index.html": "/ZealousForm/index.html",
+    "main.84487ea8.css.map": "/ZealousForm/static/css/main.84487ea8.css.map",
+    "main.7be4f905.js.map": "/ZealousForm/static/js/main.7be4f905.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.84487ea8.css",
+    "static/js/main.7be4f905.js"
+  ]
+}
